@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>watch监控</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model:value="message"/>
+            <hr><br>
+            <h2>修改对象的属性</h2>
+            <input type="text" v-model:value="girlfriend.name"/>
+            <input type="text" v-model:value="girlfriend.age"/>
+            <br>
+            名字为：{{girlfriend.name}}，年龄为：{{girlfriend.age}}
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    message: "臭宝",
+                    girlfriend: {name:"臭宝", age:24}//定义一个对象，开启深度监控
+                },
+                watch:{
+                    message(newValue,oldValue){
+                        console.log("新值："+newValue+" ,"+"旧值："+oldValue)
+                    },
+                    girlfriend: {
+                        deep: true,//开启深度监控
+                        handler(obj){
+                            console.log(obj.name+","+obj.age)
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-model</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+            <input type="checkbox" value="Java" v-model="language">Java
+            <input type="checkbox" value="Python" v-model="language">Python
+            <input type="checkbox" value="Swift" v-model="language">Swift
+            <h2>
+<!--                使用join可以将其分割-->
+                你选择了：{{language.join("，")}}
+            </h2>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    language: []
+                }
+            })
+        </script>
+    </body>
+</html>

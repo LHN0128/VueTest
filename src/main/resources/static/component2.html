@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>父组件向子组件传递简单字符串数据数据</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    </head>
+    <!--
+            父组件向子组件传递简单字符串数据数据
+    -->
+    <body>
+        <div id="app">
+            <!-- 将父组件的内容绑定到子组件-->
+            <introduce :title="msg"/>
+        </div>
+        <script type="text/javascript">
+            const introduce = {//定义组件
+                template:"<h2>{{title}}</h2>",
+                props:["title"]
+            }
+            //注册组件
+            Vue.component("introduce",introduce)
+
+            var app = new Vue({//这里把外层vue对象看作为父组件
+                el: "#app",
+                data:{
+                    msg:"这是父组件中的内容"
+                }
+            })
+        </script>
+    </body>
+</html>

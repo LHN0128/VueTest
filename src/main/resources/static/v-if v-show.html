@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-if/v-show</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button v-on:click="show=!show">点击切换下面v-if的布尔值，测试v-if</button>
+            <h2 v-if="show">
+                Vue.js
+            </h2>
+            <hr>
+            <h2>使用v-if和v-else分开显示男女</h2>
+            <ul>
+                <li v-for="(user,key,index) in users" v-if="user.gender!='女'" style="background: cornflowerblue">{{index}} {{user.name}} {{user.gender}} {{user.age}}</li>
+                <li v-else style="background:indianred">{{index}} {{user.name}} {{user.gender}} {{user.age}}</li>
+            </ul>
+            <h2 v-show="show">
+                测试v-show
+            </h2>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    users: [
+                        {name: "张三", gender: "男", age: 15},
+                        {name: "李四", gender: "女", age: 23},
+                        {name: "王五", gender: "男", age: 16}
+                    ],
+                    show: true//指定一个boolean属性
+                }
+
+            })
+        </script>
+    </body>
+</html>

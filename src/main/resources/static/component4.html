@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>子组件向父组件通信</title>
+        <script src="../node_modules/vue/dist/vue.js"></script>
+        <script src="../node_modules/axios/dist/axios.js"></script>
+    </head>
+    <!--
+            父组件向子组件传递简单字符串数据数据
+    -->
+    <body>
+<!--        <div id="app">-->
+<!--            <h2>num = {{num}}</h2>-->
+<!--            &lt;!&ndash; 将子组件的内容绑定到父组件&ndash;&gt;-->
+<!--            <counter :snum="num"/>-->
+<!--        </div>-->
+<!--        <script type="text/javascript">-->
+<!--            const counter = {//定义组件,只能包含一个根元素-->
+<!--                template:"<div><button @click='snum++'>+</button><button @click='snum&#45;&#45;'>-</button></div>",-->
+<!--                props:["snum"]-->
+<!--            }-->
+<!--            //注册组件-->
+<!--            Vue.component("counter",counter)-->
+
+<!--            var app = new Vue({//这里把外层vue对象看作为父组件-->
+<!--                el: "#app",-->
+<!--                data:{-->
+<!--                    num: 0-->
+<!--                }-->
+<!--            })-->
+<!--        </script>-->
+
+
+<!--        以上直接通过传递属性的方法行不通，需要通过调用函数的方式来传递数据-->
+
+        <div id="app">
+            <h2>num = {{num}}</h2>
+            <!-- 将子组件的内容绑定到父组件-->
+            <counter @plus="plus" @minus="minus" :snum="num"></counter>
+        </div>
+        <script type="text/javascript">
+            const counter = {//定义组件,只能包含一个根元素
+                template:"<div><button @click='add'>+</button><button @click='reduce'>-</button></div>",
+                props:["snum"],
+                methods:{
+                    add(){
+                        return this.$emit("plus");
+                    },
+                    reduce(){
+                        return this.$emit("minus");
+                    }
+
+                }
+            }
+            //注册组件
+            Vue.component("counter",counter)
+
+            var app = new Vue({//这里把外层vue对象看作为父组件
+                el: "#app",
+                data:{
+                    num: 0
+                },
+                methods:{
+                    plus(){
+                        this.num++;
+                    },
+                    minus(){
+                        this.num--;
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

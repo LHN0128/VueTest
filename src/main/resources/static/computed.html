@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>computed</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+            <h2>你的生日是：{{birth}}</h2>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    birthday: 1429032123201
+                },
+                computed:{//可以应用在插值或指令表达式复杂时的应用。因为可以将复杂的数据处理作为方法名调用
+                    birth(){
+                        var date = new Date(this.birthday);
+                        return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDay()
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

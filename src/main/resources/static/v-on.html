@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-on</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>num = {{num}}</h2>
+            <button  v-on:click="num++">点击增加</button>
+            <button @click="decrement">点击减少</button>
+            <hr>
+            <h2>事件冒泡测试。点击button时，外层div也被点击</h2>
+<!--            使用@click.stop阻止该事件冒泡-->
+            <div style="background: cadetblue" @click="print('div被点击了')">
+                <button @click.stop="print('button被点击了')">点我</button>
+            </div>
+            <hr>
+            <h2>阻止默认事件测试</h2>
+            <!--            使用@click.prevent阻止默认事件-->
+            <a href="https://www.baidu.com" @click.prevent>百度</a>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    num:1
+                },
+                methods:{
+                    decrement(){
+                        this.num--;
+                    },
+                    print(str){
+                        console.log(str);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

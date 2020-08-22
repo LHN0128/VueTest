@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-text/v-html</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+            v-text <span v-text="text"></span><br>
+            v-html <span v-html="html"></span>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    text:"<h2>插入的纯文本</h2>",
+                    html:"<h2>插入的html</h2>"
+                }
+            })
+        </script>
+    </body>
+</html>

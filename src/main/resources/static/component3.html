@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>父组件向子组件传递复杂数据</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    </head>
+    <!--
+            父组件向子组件传递复杂数据
+    -->
+    <body>
+        <div id="app">
+            <!-- 将父组件的内容绑定到子组件-->
+            <lesson-list :items="lessons"/>
+        </div>
+        <script type="text/javascript">
+            const lessonList = {//定义组件
+                //在模板处遍历父组件传来的复杂数据，此处使用的是esc下面的单引号
+                template:`<ul>
+                               <li v-for="item in items" :key="item.id">{{item.id}}----{{item.name}}</li>
+                          </ul>`,
+                props:{
+                    items:{
+                        //指定数据类型是Array还是Object
+                        type: Array,
+                        //指定默认值
+                        default: []
+                    }
+                }
+            }
+            //注册组件
+            Vue.component("lessonList",lessonList)
+
+            var app = new Vue({//这里把外层vue对象看作为父组件
+                el: "#app",
+                data:{
+                    msg:"这是父组件中的内容",
+                    lessons:[
+                        {"id":1,"name":"高等数学"},
+                        {"id":2,"name":"线性代数"}
+                    ]
+                }
+
+            })
+        </script>
+    </body>
+</html>

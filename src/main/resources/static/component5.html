@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>子组件向父组件通信</title>
+        <script src="../node_modules/vue/dist/vue.js"></script>
+        <script src="../node_modules/axios/dist/axios.js"></script>
+    </head>
+    <!--
+            父组件向子组件传递简单字符串数据数据
+    -->
+    <body>
+        <div id="app">
+            <ul>
+                <li v-for="(user,index) in users" :key="index">
+                    {{index}}--{{user.name}}--{{user.age}}
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+
+            var app = new Vue({//这里把外层vue对象看作为父组件
+                el: "#app",
+                data:{
+                    users:[]
+                },
+                created(){
+                    //初始化加载数据、
+                    axios({//这里是config配置对象
+                        url:"data.json",//这里从数据文件中加载
+                        method:"get"
+                    }).then(response =>{
+                        console.log(response.data);
+                        //将数据赋值到vue实例的属性users中
+                        //不能使用this，在axios回调函数中this表示的是窗口，而不是vue实例
+                        app.users = response.data;//接受从后端传递来的数据
+                        console.log(app.others)
+                    }).catch(error=>{
+                        alert("发生了错误")
+                    });
+                }
+            })
+        </script>
+    </body>
+</html>
+
+
+
